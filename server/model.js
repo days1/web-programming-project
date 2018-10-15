@@ -1,5 +1,18 @@
-let users = [];
 
+
+class Users{
+    constructor(){
+        this.users = [];
+    }
+    
+    addUser(User){
+        this.users.push(User);
+    }
+
+    displayUsers(){
+        return this.users;
+    }
+}
 class User{
     constructor(name, username, password){
         this.name = name;
@@ -13,4 +26,4 @@ class User{
     }
 }
 
-module.exports = {User};
+module.exports = {Users, User};

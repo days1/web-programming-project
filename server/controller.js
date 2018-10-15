@@ -1,5 +1,7 @@
 const express = require("express");
-const {User} = require("./model");
+const {Users, User} = require("./model");
+
+var users = new Users();
 
 const app = express.Router();
 
@@ -11,9 +13,9 @@ app.get("/users", (req, res) =>{
     res.send({users: User.users});
 });
 app.post("/users", (req, res) =>{
-    const user = new User(req.body.name, req.body.username, req.body.password);
-    User.users.push(user);
-    res.send({user: user});
+    const user = new User({name: req.body.name, username: req.body.username, password: req.body.password});
+    users.addUser(user);
+    res.send(user);
 });
 
 app.get("/exercises", (req, res) =>{
