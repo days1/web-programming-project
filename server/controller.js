@@ -1,7 +1,7 @@
 const express = require("express");
-const {Users, User} = require("./model");
+const {Database, User} = require("./model");
 
-var users = new Users();
+var db = new Database();
 
 const app = express.Router();
 
@@ -10,21 +10,17 @@ app.get("/", (req, res) =>{
 });
 
 app.get("/users", (req, res) =>{
-    res.send(users.displayUsers);
+    res.send(db.users);
 });
 
 app.post("/users", (req, res) =>{
     const user = new User(req.body.name, req.body.username, req.body.password);
-    users.addUser(user);
-    res.send(user);
+    db.addUser(user);
+    res.send(user + " has been added to the database");
 });
 
 app.get("/exercises", (req, res) =>{
-    res.send("Page for listing exercise");
-});
-
-app.get("/users", (req,res) =>{
-    res.send("Shows all the users");
+    res.send(db.exercises);
 });
 
 
