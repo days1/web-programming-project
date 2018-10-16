@@ -10,10 +10,11 @@ app.get("/", (req, res) =>{
 });
 
 app.get("/users", (req, res) =>{
-    res.send({users: User.users});
+    res.send(users.displayUsers);
 });
+
 app.post("/users", (req, res) =>{
-    const user = new User({name: req.body.name, username: req.body.username, password: req.body.password});
+    const user = new User(req.body.name, req.body.username, req.body.password);
     users.addUser(user);
     res.send(user);
 });

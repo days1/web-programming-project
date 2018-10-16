@@ -13,6 +13,7 @@ class Users{
         return this.users;
     }
 }
+
 class User{
     constructor(name, username, password){
         this.name = name;
