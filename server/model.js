@@ -38,6 +38,7 @@ class User{
         this.password = password;
         this.exercises = [];
         this.friendsList = [];
+        this.foodDiary = [];
 
     }
     
@@ -57,6 +58,10 @@ class User{
         return this.friendsList;
     }
 
+    showFoodDiary(){
+        return this.foodDiary;
+    }
+
     addExercise(exercise){
         this.exercises.push(exercise);
     }
@@ -73,6 +78,21 @@ class User{
         this.friendsList.splice(friend);
     }
 
+    addFoodEntry(foodEntry){
+        this.foodDiary.push(foodEntry);
+    }
+
+    removeFoodEntry(foodEntry){
+        this.foodDiary.splice(foodEntry);
+    }
 }
 
-module.exports = {Database, User};
+class FoodEntry{
+    constructor(date, time, food){
+        this.date = date;
+        this.time = time;
+        this.food = food;
+    }
+}
+
+module.exports = {Database, User, FoodEntry};

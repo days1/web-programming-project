@@ -1,5 +1,5 @@
 const express = require("express");
-const {Database, User} = require("./model");
+const {Database, User, FoodEntry} = require("./model");
 
 var db = new Database();
 
@@ -13,12 +13,6 @@ app.get("/exercises", (req, res) =>{
     res.send(db.showExercises());
 });
 
-app.post("/users", (req, res) =>{
-    var user = new User(req.body.name, req.body.username, req.body.password);
-    db.addUser(user);
-    res.send(user.username + " has been added to the database");
-});
-
 app.get("/users/:id", (req, res) =>{
     var user = db.getUser(req.params.id);
     res.send(
@@ -29,6 +23,12 @@ app.get("/users/:id", (req, res) =>{
             "Friends": user.showFriends()
         }
     );
+});
+
+app.post("/users", (req, res) =>{
+    var user = new User(req.body.name, req.body.username, req.body.password);
+    db.addUser(user);
+    res.send(user.username + " has been added to the database");
 });
 
 app.get("/users/:id/exerciseList", (req, res) =>{
@@ -47,6 +47,16 @@ app.get("/users/:id/friendsList", (req, res) =>{
 app.post("/users/:id/friendsList", (req, res) =>{
     db.getUser(req.params.id).addFriend(req.body.username);
     res.send(req.body.username + " has been added to friendslist");
+});
+
+app.get("/users/:id/foodDiary", (req, res) =>{
+    res.send(db.getUser(req.params.id).showFoodDiary());
+});
+
+app.post("/users/:id/foodDiary", (req, res) =>{
+    var foodEntry = new FoodEntry(req.body.date, req.body.time, req.body.food)
+    db.getUser(req.params.id).addFoodEntry(foodEntry);
+    res.send(foodEntry.food + " has been added to food diary");
 });
 
 module.exports = app;
