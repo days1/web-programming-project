@@ -21,6 +21,11 @@ class Database{
     removeExercise(exercise){
         this.exercises.splice(exercise);
     }
+
+    getUser(username){
+        var index = this.users.findIndex(user => user.username === username);
+        return this.users[index];
+    }
 }
 
 class User{
@@ -47,16 +52,6 @@ class User{
 
     removeFriend(friend){
         this.friendsList.splice(friend);
-    }
-
-    displayFriends(){
-        this.friendsList.forEach(function (user){
-            console.log(user);
-        })
-    }
-
-    displayExercises(){
-        this.exercises.forEach((user) => console.log(user));
     }
 
 }
