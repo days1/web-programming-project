@@ -32,10 +32,11 @@ class Database{
 }
 
 class User{
-    constructor(name, username, password){
+    constructor(name, username, password, startWgt){
         this.name = name;
         this.username = username;
         this.password = password;
+        this.weight = startWgt;
         this.exercises = [];
         this.friendsList = [];
         this.foodDiary = [];
@@ -48,6 +49,10 @@ class User{
 
     getUsername(){
         return this.username;
+    }
+
+    getWeight(){
+        return this.weight;
     }
 
     showExercises(){
@@ -84,6 +89,17 @@ class User{
 
     removeFoodEntry(foodEntry){
         this.foodDiary.splice(foodEntry);
+    }
+
+    changeWeight(newWeight){
+        const previousWeight = this.weight;
+        this.weight = newWeight;
+        if(this.weight > previousWeight){
+            return ("You've gained " + (this.weight - previousWeight) + " pounds.")
+        } else if (this.weight < previousWeight){
+            return ("You've lost " + Math.abs(this.weight - previousWeight) + " pounds.");
+        } else
+            return("You've maintained your weight.");
     }
 }
 

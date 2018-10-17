@@ -26,7 +26,7 @@ app.get("/users/:id", (req, res) =>{
 });
 
 app.post("/users", (req, res) =>{
-    var user = new User(req.body.name, req.body.username, req.body.password);
+    var user = new User(req.body.name, req.body.username, req.body.password, req.body.startWgt);
     db.addUser(user);
     res.send(user.username + " has been added to the database");
 });
@@ -57,6 +57,10 @@ app.post("/users/:id/foodDiary", (req, res) =>{
     var foodEntry = new FoodEntry(req.body.date, req.body.time, req.body.food)
     db.getUser(req.params.id).addFoodEntry(foodEntry);
     res.send(foodEntry.food + " has been added to food diary");
+});
+
+app.post("/users/:id/weighIn", (req, res) =>{
+    res.send(db.getUser(req.params.id).changeWeight(req.body.weight));
 });
 
 module.exports = app;
