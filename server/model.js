@@ -1,11 +1,14 @@
-
+const exercises = require("./exercises");
 
 class Database{
     constructor(){
         this.users = [];
-        this.exercises = [];
+        this.exercises = [exercises];
     }
 
+    showExercises(){
+        return this.exercises;
+    }
     addUser(user){
         this.users.push(user);
     }
@@ -33,9 +36,25 @@ class User{
         this.name = name;
         this.username = username;
         this.password = password;
-        this.exercises = [{}];
-        this.friendsList = [{}];
+        this.exercises = [];
+        this.friendsList = [];
 
+    }
+    
+    getName(){
+        return this.name;
+    }
+
+    getUsername(){
+        return this.username;
+    }
+
+    showExercises(){
+        return this.exercises;
+    }
+
+    showFriends(){
+        return this.friendsList;
     }
 
     addExercise(exercise){
