@@ -3,7 +3,7 @@ const exercises = require("./exercises");
 class Database{
     constructor(){
         this.users = [];
-        this.exercises = [exercises];
+        this.exercises = exercises;
     }
 
     showExercises(){
