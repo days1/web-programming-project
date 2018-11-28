@@ -6,6 +6,16 @@ class Database{
         this.exercises = exercises;
     }
 
+    login(name, fbid, access_token){
+        let user = this.getUser(name);
+        if(!user){
+            user = new User(name, fbid);
+            this.users.push(user);
+        }
+        user.access_token = access_token;
+        return user;
+    }
+
     showExercises(){
         return this.exercises;
     }
@@ -32,12 +42,11 @@ class Database{
 }
 
 class User{
-    constructor(name, username, password, startWgt){
+    constructor(name, fbid){
         this.name = name;
-        this.username = username;
-        this.password = password;
-        this.weight = startWgt;
-        this.exercises = [];
+        this.id = fbid;
+        this.weight;
+        this.exercisesList = [];
         this.friendsList = [];
         this.foodDiary = [];
 
@@ -47,8 +56,8 @@ class User{
         return this.name;
     }
 
-    getUsername(){
-        return this.username;
+    getId(){
+        return this.id;
     }
 
     getWeight(){
@@ -56,7 +65,7 @@ class User{
     }
 
     showExercises(){
-        return this.exercises;
+        return this.exercisesList;
     }
 
     showFriends(){
@@ -67,8 +76,8 @@ class User{
         return this.foodDiary;
     }
 
-    addExercise(exercise){
-        this.exercises.push(exercise);
+    addExercise(exercise, link){
+        this.exercisesList.push({exercise: exercise, link: link});
     }
 
     removeExercise(exercise){

@@ -1,17 +1,18 @@
-const api_root = "http://localhost:3000";
-export let playerId = null;
+const api_root = "http://localhost:80";
+export let userId = null;
 
 export function Home(){
     return myFetch(api_root + "/");
 }
-export function getExercises(){
-    // return myFetch(api_root + `/captions/${playerId}`);\
-    console.log('getExercises', api_root);
-    return myFetch(api_root + "/exercises")
+export function AddExercise(exercise, link){
+    return myFetch(api_root + "/users/" + userId + "/exerciseList", {exercise: exercise, link: link})
+}
+export function Exercises(){
+    return myFetch(api_root + "/exercises");
 }
 export function Login(name, fbid, access_token){
-    return myFetch(api_root + `/players`, { name: name, fbid: fbid, access_token: access_token })
-            .then(x=> playerId = x.id);
+    return myFetch(api_root + "/users", { name: name, fbid: fbid, access_token: access_token })
+            .then(x=> userId = x.id);
 }
 
 
@@ -19,10 +20,10 @@ export function Login(name, fbid, access_token){
   function myFetch(url = ``, data = null) {
       let options = {
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin" // include, same-origin, *omit
-            // headers: {
-            //     playerId: playerId
-            // }
+            credentials: "same-origin", // include, same-origin, *omit
+            headers: {
+                userId: userId
+            }
       };
       if(data){
           options = { 

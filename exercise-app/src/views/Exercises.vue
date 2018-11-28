@@ -8,7 +8,11 @@
                         <iframe class="embed-responsive-item" :src="data.link" allowfullscreen></iframe>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{data.exercise}}</h5>
+                        <h5 class="card-title">{{data.exercise}}
+                            <a @click.prevent="checkLogin(), addExercise(data.exercise, data.link)" class="add" >
+                                <font-awesome-icon icon="plus-square"/>
+                            </a>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -18,6 +22,8 @@
 
 <script>
 import * as api from '@/services/api_access';
+import * as fb from '@/services/facebook';
+
 export default {
     name: "exercises",
     data(){
@@ -26,16 +32,11 @@ export default {
         }
     },
     methods: {
-        addExercise(){
-            this.$validator.validateAll().then((result) => {
-                if (result){
-                    this.exercises.push({exercise: this.exercise});
-                    this.exercise = '';
-                }
-            })
+        addExercise(exercise, link){  
+            api.AddExercise(exercise, link);
         },
         getExercises(){
-            api.getExercises()
+            api.Exercises()
                 .then(x => {
                     if (!this.exercises) {
                         this.exercises = [];
@@ -46,12 +47,20 @@ export default {
                     return this.exercises;
                     // this.exercises.push(x);
                 });
-        }
+        },
+        checkLogin(){
+            fb.FBLogin()
+        },
+        userId: () => api.userId
     }
 }
 </script>
 
 <style lang="scss">
+
+    .add {
+        float: right 
+    }
 
 </style>
 

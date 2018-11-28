@@ -21,6 +21,11 @@ export default new Router({
       path: '/exercises',
       name: 'exercises',
       component: () => import('./views/Exercises.vue')
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('./views/Profile.vue')
     }
   ]
 })
