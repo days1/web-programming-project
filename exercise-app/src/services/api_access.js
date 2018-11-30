@@ -4,8 +4,14 @@ export let userId = null;
 export function Home(){
     return myFetch(api_root + "/");
 }
+export function Profile(){
+    return myFetch(api_root + "/profile/" + userId);
+}
 export function AddExercise(exercise, link){
-    return myFetch(api_root + "/users/" + userId + "/exerciseList", {exercise: exercise, link: link})
+    return myFetch(api_root + "/profile/" + userId + "/exerciseList", {userId: userId, exercise: exercise, link: link})
+}
+export function MyExercises(){
+    return myFetch(api_root + "/profile/" + userId + "/exerciseList")
 }
 export function Exercises(){
     return myFetch(api_root + "/exercises");

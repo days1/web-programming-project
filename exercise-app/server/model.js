@@ -6,10 +6,10 @@ class Database{
         this.exercises = exercises;
     }
 
-    login(name, fbid, access_token){
-        let user = this.getUser(name);
+    login(name, id, access_token){
+        let user = this.getUser(id);
         if(!user){
-            user = new User(name, fbid);
+            user = new User(name, id);
             this.users.push(user);
         }
         user.access_token = access_token;
@@ -35,16 +35,16 @@ class Database{
         this.exercises.splice(exercise);
     }
 
-    getUser(username){
-        var index = this.users.findIndex(user => user.username === username);
+    getUser(id){
+        var index = this.users.findIndex(x => x.id == id);
         return this.users[index];
     }
 }
 
 class User{
-    constructor(name, fbid){
+    constructor(name, id){
         this.name = name;
-        this.id = fbid;
+        this.id = id;
         this.weight;
         this.exercisesList = [];
         this.friendsList = [];

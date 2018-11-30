@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1> Hi </h1>
+    <h1>Exercise Challenge of the Day</h1>
   </div>
 </template>
 

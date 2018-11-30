@@ -1,8 +1,8 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand logo-font" href="/">
+      <router-link class="navbar-brand logo-font" to="/">
           <img src="http://chittagongit.com/images/excercise-icon/excercise-icon-17.jpg" width="40" height="40" alt="logo">
-      </a>
+      </router-link>
       <button class="navbar-toggler order-first" type="button" data-toggle="collapse" data-target="#navleft" 
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
@@ -24,12 +24,17 @@
         <div class="collapse navbar-collapse w-100 order-3" id="navright">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a @click="login" class="nav-link" exact-active-class="active" scope="public_profile,email"
-                    onlogin="checkLoginState();">
+                    <router-link v-if="loggedIn" class="nav-link" exact-active-class="active" to="/profile" id="profile">
+                        Profile
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <a v-if="!loggedIn" v-on:click="login" class="nav-link" exact-active-class="active" scope="public_profile,email"
+                    onlogin="checkLoginState();" href="#">
                         Login / Sign Up
                     </a>
-                    <a v-if="userId() !== null" class="nav-link" exact-active-class="active">
-                        Profile
+                    <a href="/" v-else class="nav-link">
+                        Logout
                     </a>
                 </li>
             </ul>
@@ -48,6 +53,10 @@
         text-align: center;
         margin: auto;
     }
+
+    #profile {
+        float: left;
+    }
 </style>
 
 <script>
@@ -62,7 +71,8 @@ export default {
     },
     methods: {
         login(){
-            fb.FBLogin();
+            fb.FBLogin()
+            this.loggedIn = true;
         },
         userId: () => api.userId
     }
