@@ -10,6 +10,9 @@ export function Profile(){
 export function AddExercise(exercise, link){
     return myFetch(api_root + "/profile/" + userId + "/exerciseList", {userId: userId, exercise: exercise, link: link})
 }
+export function RemoveExercise(exercise, link){
+    return myFetch(api_root + "/profile/" + userId + "/exerciseList", {userId: userId, exercise: exercise, link: link})
+}
 export function MyExercises(){
     return myFetch(api_root + "/profile/" + userId + "/exerciseList")
 }
