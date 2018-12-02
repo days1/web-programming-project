@@ -14,7 +14,7 @@
                 @click.prevent="addExercise(data.exercise, data.link)"
                 class="add"
               >
-                <font-awesome-icon icon="plus-square"/>
+                <font-awesome-icon icon="heart"/>
               </a>
             </h5>
           </div>
@@ -40,7 +40,7 @@ export default {
         alert("Please login to add exercise to exercise list!");
       } else {
         api.AddExercise(exercise, link);
-        alert(exercise + " has been added to your exercise list!");
+        alert(exercise + " has been favorited!")
       }
     },
     getExercises() {
@@ -61,7 +61,11 @@ export default {
 </script>
 
 <style lang="scss">
+.col-md-3{
+  padding-bottom: 15px;
+}
 .add {
+  cursor: pointer;
   float: right;
 }
 </style>

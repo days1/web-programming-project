@@ -77,7 +77,12 @@ class User{
     }
 
     addExercise(exercise, link){
-        this.exercisesList.push({exercise: exercise, link: link});
+        if(this.exercisesList.find(x => x.exercise == exercise)){
+            return;
+        } 
+        else {
+            this.exercisesList.push({exercise: exercise, link: link});
+        }
     }
 
     removeExercise(exercise){

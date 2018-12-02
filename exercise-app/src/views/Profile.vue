@@ -1,21 +1,39 @@
 <template>
   <div class="container-fluid" id="profile">
     <h1>Hello, {{name}}!</h1>
-    <div class="row">
-      <div class="col-md-3" v-for="(data,index) in exerciseList" :key="index">
-        <div class="card h-100">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" :src="data.link" allowfullscreen></iframe>
+    <div class="container-fluid border border-secondary rounded shadow-sm p-4 mb-4 bg-white">
+      <ul>
+        <li>
+          <div class=""> 
+            Weight: {{weight}}
+            <a @click="changeWeight"
           </div>
-          <div class="card-body">
-            <h5 class="card-title">
-                {{data.exercise}}
-                <a @click="removeExercise(data.exercise, data.link)" class="add">
-                    <font-awesome-icon icon="plus-square"/>
-                </a>
-            </h5>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Favorite Exercises</h5>
+        <div class="card-columns">
+          <div class="card"  v-for="(data,index) in exerciseList" :key="index">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" :src="data.link" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                  {{data.exercise}}
+                  <a @click="removeExercise(data.exercise, data.link)" class="remove">
+                      <font-awesome-icon icon="minus"/>
+                  </a>
+              </h5>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="col">
+      </div>
+      <div class="col">
+          <h5>Friends List</h5>
       </div>
     </div>
   </div>
@@ -49,5 +67,14 @@ export default {
 </script>
 
 <style lang="scss">
+
+.remove {
+  cursor: pointer;
+  float: right;
+}
+
+li {
+  list-style: none;
+}
 </style>
 

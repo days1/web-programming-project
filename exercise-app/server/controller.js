@@ -34,7 +34,9 @@ app.post("/profile/:id/exerciseList", (req, res) =>{
     res.send(user.showExercises());
 });
 
-app.remove()
+app.delete("/profile/:id/exerciseList", (req, res) =>{
+
+});
 
 app.get("/users/:id/friendsList", (req, res) =>{
     res.send(db.getUser(req.params.id).showFriends());
