@@ -89,7 +89,8 @@ class User{
     }
 
     removeExercise(exercise){
-        this.exercises.splice(exercise);
+        var i = this.exercisesList.findIndex(x => x.exercise == exercise);
+        this.exercisesList.splice(i, 1);
     }
 
     addFriend(friend){

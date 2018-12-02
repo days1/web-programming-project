@@ -22,7 +22,7 @@
             <div class="card-body">
               <h5 class="card-title">
                   {{data.exercise}}
-                  <a @click="removeExercise(data.exercise, data.link)" class="remove">
+                  <a  @click="removeExercise(data.exercise, data.link)" class="remove">
                       <font-awesome-icon icon="minus"/>
                   </a>
               </h5>
@@ -63,7 +63,8 @@ export default {
     };
   },
   created: function() {
-    api.Profile().then(x => {
+    api.Profile()
+      .then(x => {
         this.name = x.name, 
         this.exerciseList = x.exercisesList,
         this.friendsList = x.friendsList
@@ -79,7 +80,9 @@ export default {
       
     },
     removeExercise(exercise, link) {
-        
+      this.exerciseList.splice(this.exerciseList.indexOf(exercise), 1);
+      api.RemoveExercise(exercise, link)
+        .then(x => this.exercisesList = x.exercisesList);
     },
     changeWeight() {}
   }

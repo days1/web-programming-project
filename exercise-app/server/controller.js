@@ -39,7 +39,9 @@ app.post("/profile/:id/exerciseList", (req, res) =>{
 });
 
 app.delete("/profile/:id/exerciseList", (req, res) =>{
-
+    var user = db.getUser(req.body.userId);
+    user.removeExercise(req.body.exercise);
+    res.send(user.showExercises());
 });
 
 app.get("/profile/:id/friendsList", (req, res) =>{

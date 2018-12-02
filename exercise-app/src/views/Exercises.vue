@@ -52,7 +52,6 @@ export default {
           this.exercises.push(x[i]);
         }
         return this.exercises;
-        // this.exercises.push(x);
       });
     },
     userId: () => api.userId
