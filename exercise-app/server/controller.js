@@ -13,6 +13,10 @@ app.get("/exercises", (req, res) =>{
     res.send(db.showExercises());
 });
 
+app.get("/users", (req, res) =>{
+    res.send(db.showUsers);
+});
+
 app.get("/profile/:id", (req, res) =>{
     var user = db.getUser(req.params.id);
     res.send(user);
@@ -38,26 +42,27 @@ app.delete("/profile/:id/exerciseList", (req, res) =>{
 
 });
 
-app.get("/users/:id/friendsList", (req, res) =>{
+app.get("/profile/:id/friendsList", (req, res) =>{
     res.send(db.getUser(req.params.id).showFriends());
 });
 
-app.post("/users/:id/friendsList", (req, res) =>{
-    db.getUser(req.params.id).addFriend(req.body.username);
-    res.send(req.body.username + " has been added to friendslist");
+app.post("/profile/:id/friendsList", (req, res) =>{
+    var user = db.getUser(req.params.userId);
+    user.addFriend(req.body.name);
+    res.send(user.showFriends());
 });
 
-app.get("/users/:id/foodDiary", (req, res) =>{
+app.get("/profile/:id/foodDiary", (req, res) =>{
     res.send(db.getUser(req.params.id).showFoodDiary());
 });
 
-app.post("/users/:id/foodDiary", (req, res) =>{
+app.post("/profile/:id/foodDiary", (req, res) =>{
     var foodEntry = new FoodEntry(req.body.date, req.body.time, req.body.food)
     db.getUser(req.params.id).addFoodEntry(foodEntry);
     res.send(foodEntry.food + " has been added to food diary");
 });
 
-app.post("/users/:id/weighIn", (req, res) =>{
+app.post("/profile/:id/weighIn", (req, res) =>{
     res.send(db.getUser(req.params.id).changeWeight(req.body.weight));
 });
 

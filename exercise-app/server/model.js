@@ -16,6 +16,9 @@ class Database{
         return user;
     }
 
+    showUsers(){
+        return this.users;
+    }
     showExercises(){
         return this.exercises;
     }
@@ -90,7 +93,11 @@ class User{
     }
 
     addFriend(friend){
-        this.friendsList.push(friend);
+        if(this.friendsList.find(x => x.friend == friend)){
+            return;
+        } else {
+            this.friendsList.push(friend);
+        }
     }
 
     removeFriend(friend){

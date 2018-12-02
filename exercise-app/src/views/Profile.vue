@@ -6,7 +6,7 @@
         <li>
           <div class=""> 
             Weight: {{weight}}
-            <a @click="changeWeight"
+            <a @click="changeWeight"></a>
           </div>
         </li>
       </ul>
@@ -34,7 +34,17 @@
       </div>
       <div class="col">
           <h5>Friends List</h5>
-      </div>
+          <form class="form-inline" >
+            <input class="form-control form-control-sm mr-3 w-75" type="text" 
+              placeholder="Friends Name" aria-label="Search" v-model="search">
+            <font-awesome-icon icon="search" aria-hidden="true"/>
+          </form>
+            <ul>
+              <li v-for="(data,index) in friendsList" :key="index">
+                {{data.friend}}
+              </li>
+            </ul>
+        </div>
     </div>
   </div>
 </template>
@@ -48,16 +58,26 @@ export default {
     return {
       name: null,
       weight: null,
-      exerciseList: null
+      exerciseList: null,
+      friendsList: null
     };
   },
   created: function() {
     api.Profile().then(x => {
-      (this.name = x.name), 
-      (this.exerciseList = x.exercisesList);
+        this.name = x.name, 
+        this.exerciseList = x.exercisesList,
+        this.friendsList = x.friendsList
     });
   },
+  computed:{
+    filterUsers: function(){
+      api.Users()      
+    }
+  },
   methods: {
+    addFriend(name){
+      
+    },
     removeExercise(exercise, link) {
         
     },

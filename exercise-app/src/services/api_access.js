@@ -7,6 +7,12 @@ export function Home(){
 export function Profile(){
     return myFetch(api_root + "/profile/" + userId);
 }
+export function Users(){
+    return myFetch(api_root + "/users")
+}
+export function AddFriend(name){
+    return myFetch(api_root + "/profile/" + userId + "/friendsList", {name: name});
+}
 export function AddExercise(exercise, link){
     return myFetch(api_root + "/profile/" + userId + "/exerciseList", {userId: userId, exercise: exercise, link: link})
 }
