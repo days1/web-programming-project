@@ -94,15 +94,17 @@ class User{
     }
 
     addFriend(friend){
-        if(this.friendsList.find(x => x.friend == friend)){
-            return;
-        } else {
+        if(this.friendsList.find(x => x.name == friend)){
+            return false;
+        } 
+        else {
             this.friendsList.push(friend);
         }
     }
 
     removeFriend(friend){
-        this.friendsList.splice(friend);
+        var i = this.friendsList.findIndex(x => x.name == friend);
+        this.friendsList.splice(i, 1);
     }
 
     addFoodEntry(foodEntry){

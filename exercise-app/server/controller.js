@@ -14,7 +14,7 @@ app.get("/exercises", (req, res) =>{
 });
 
 app.get("/users", (req, res) =>{
-    res.send(db.showUsers);
+    res.send(db.showUsers());
 });
 
 app.get("/profile/:id", (req, res) =>{
@@ -49,8 +49,14 @@ app.get("/profile/:id/friendsList", (req, res) =>{
 });
 
 app.post("/profile/:id/friendsList", (req, res) =>{
-    var user = db.getUser(req.params.userId);
+    var user = db.getUser(req.params.id);
     user.addFriend(req.body.name);
+    res.send(user.showFriends());
+});
+
+app.delete("/profile/:id/friendsList", (req, res) =>{
+    var user = db.getUser(req.params.id);
+    user.removeFriend(req.body.name);
     res.send(user.showFriends());
 });
 

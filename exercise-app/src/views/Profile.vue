@@ -22,7 +22,7 @@
             <div class="card-body">
               <h5 class="card-title">
                   {{data.exercise}}
-                  <a  @click="removeExercise(data.exercise, data.link)" class="remove">
+                  <a @click="removeExercise(data.exercise, data.link)" class="remove">
                       <font-awesome-icon icon="minus"/>
                   </a>
               </h5>
@@ -34,16 +34,31 @@
       </div>
       <div class="col">
           <h5>Friends List</h5>
+          <div class="container">
+            <ul>
+              <li v-for="(data,index) in friendsList" :key="index" id="friend">
+                {{data}}
+                <a @click="removeFriend(data)" class="friendRemove">
+                      <font-awesome-icon icon="minus"/>
+                </a>
+              </li>
+            </ul>
+          </div>
           <form class="form-inline" >
             <input class="form-control form-control-sm mr-3 w-75" type="text" 
               placeholder="Friends Name" aria-label="Search" v-model="search">
             <font-awesome-icon icon="search" aria-hidden="true"/>
           </form>
+          <div class="container">
             <ul>
-              <li v-for="(data,index) in friendsList" :key="index">
-                {{data.friend}}
+              <li v-for="(data,index) in usersList" :key="index" id="friend">
+                {{data}}
+                <a @click.prevent="addFriend(data)" class="add">
+                  <font-awesome-icon icon="plus-circle"/>
+                </a>
               </li>
             </ul>
+          </div> 
         </div>
     </div>
   </div>
@@ -59,7 +74,9 @@ export default {
       name: null,
       weight: null,
       exerciseList: null,
-      friendsList: null
+      friendsList: null,
+      usersList: this.getUsers(),
+      search: ""
     };
   },
   created: function() {
@@ -71,26 +88,64 @@ export default {
     });
   },
   computed:{
-    filterUsers: function(){
-      api.Users()      
+    filterUsers(){
+      return this.usersList.filter(x => {
+        return x.user.toLowerCase().includes(this.search.to
+        ())
+      })
     }
   },
   methods: {
+    getUsers(){
+      api.Users()
+        .then(x => {
+          if (!this.usersList) {
+            this.usersList = [];
+          }
+          for (var i in x) {
+            this.usersList.push(x[i].name);
+          }
+          return this.usersList;
+      });
+    },
     addFriend(name){
-      
+      api.AddFriend(name)
+        .then(x => {
+          if(x)
+            this.friendsList.push(name);
+          else
+            alert(name + " is already in your friends list!")
+        })
+    },
+    removeFriend(name){
+      this.friendsList.splice(this.friendsList.indexOf(name), 1);
+      api.RemoveFriend(name)
+        .then(x => this.friendsList = x.friendsList);
     },
     removeExercise(exercise, link) {
       this.exerciseList.splice(this.exerciseList.indexOf(exercise), 1);
       api.RemoveExercise(exercise, link)
         .then(x => this.exercisesList = x.exercisesList);
     },
-    changeWeight() {}
+    changeWeight() {},
+
+    userId: () => api.userId
   }
 };
 </script>
 
 <style lang="scss">
 
+.add {
+  float: right;
+  padding-right: 35px;
+}
+
+.friendRemove{
+  cursor: pointer;
+  float: right;
+  padding-right: 35px;
+}
 .remove {
   cursor: pointer;
   float: right;
@@ -98,6 +153,10 @@ export default {
 
 li {
   list-style: none;
+}
+#friend {
+    padding-top: 20px;
+
 }
 </style>
 

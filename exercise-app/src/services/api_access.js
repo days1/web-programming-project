@@ -8,10 +8,19 @@ export function Profile(){
     return myFetch(api_root + "/profile/" + userId);
 }
 export function Users(){
-    return myFetch(api_root + "/users")
+    return myFetch(api_root + "/users");
 }
 export function AddFriend(name){
     return myFetch(api_root + "/profile/" + userId + "/friendsList", {name: name});
+}
+export function RemoveFriend(name){
+    return myDelete(api_root + "/profile/" + userId + "/friendsList", {name: name});
+}
+export function Exercises(){
+    return myFetch(api_root + "/exercises");
+}
+export function MyExercises(){
+    return myFetch(api_root + "/profile/" + userId + "/exerciseList");
 }
 export function AddExercise(exercise, link){
     return myFetch(api_root + "/profile/" + userId + "/exerciseList", {userId: userId, exercise: exercise, link: link});
@@ -19,12 +28,8 @@ export function AddExercise(exercise, link){
 export function RemoveExercise(exercise, link){
     return myDelete(api_root + "/profile/" + userId + "/exerciseList", {userId: userId, exercise: exercise, link: link});
 }
-export function MyExercises(){
-    return myFetch(api_root + "/profile/" + userId + "/exerciseList")
-}
-export function Exercises(){
-    return myFetch(api_root + "/exercises");
-}
+
+
 export function Login(name, fbid, access_token){
     return myFetch(api_root + "/users", { name: name, fbid: fbid, access_token: access_token })
             .then(x=> userId = x.id);
