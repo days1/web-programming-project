@@ -4,13 +4,14 @@ import jQuery from 'jquery'
 import router from './router'
 import VeeValidate from 'vee-validate'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faMinus, faHeart, faPlusCircle, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faHeart, faPlusCircle, faSearch, faWeight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faHeart)
 library.add(faMinus)
 library.add(faPlusCircle)
 library.add(faSearch)
+library.add(faWeight)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

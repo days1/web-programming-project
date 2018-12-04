@@ -28,6 +28,9 @@ export function AddExercise(exercise, link){
 export function RemoveExercise(exercise, link){
     return myDelete(api_root + "/profile/" + userId + "/exerciseList", {userId: userId, exercise: exercise, link: link});
 }
+export function ChangeWeight(weight){
+    return myFetch(api_root + "/profile/" + userId + "/weighIn", {weight: weight});
+}
 
 
 export function Login(name, fbid, access_token){
