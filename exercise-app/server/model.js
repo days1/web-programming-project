@@ -22,6 +22,11 @@ class Database{
     showExercises(){
         return this.exercises;
     }
+    searchExercises(exercise){
+        return this.exercises.filter(x => {
+            return x.exercise.toLowerCase().includes(exercise);
+        })
+    }
     addUser(user){
         this.users.push(user);
     }

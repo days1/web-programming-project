@@ -19,6 +19,9 @@ export function RemoveFriend(name){
 export function Exercises(){
     return myFetch(api_root + "/exercises");
 }
+export function ExerciseSearch(exercise){
+    return myFetch(api_root + "/exerciseSearch", {exercise: exercise})
+}
 export function MyExercises(){
     return myFetch(api_root + "/profile/" + userId + "/exerciseList");
 }

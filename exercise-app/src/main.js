@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import jQuery from 'jquery'
 import router from './router'
+import vSelect from 'vue-select'
 import VeeValidate from 'vee-validate'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMinus, faHeart, faPlusCircle, faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -12,6 +13,7 @@ library.add(faMinus)
 library.add(faPlusCircle)
 library.add(faSearch)
 
+Vue.component('v-select', vSelect);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 global.jQuery = jQuery;

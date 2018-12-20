@@ -13,6 +13,10 @@ app.get("/exercises", (req, res) =>{
     res.send(db.showExercises());
 });
 
+app.post("/exerciseSearch", (req, res) =>{
+    res.send(db.searchExercises(req.body.exercise));
+});
+
 app.get("/users", (req, res) =>{
     res.send(db.showUsers());
 });
