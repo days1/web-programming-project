@@ -39,8 +39,12 @@ export default {
       if (this.userId() == null) {
         alert("Please login to add exercise to exercise list!");
       } else {
-        api.AddExercise(exercise, link);
-        alert(exercise + " has been favorited!")
+        api.AddExercise(exercise, link).then(x => {
+          if(x){
+            alert(exercise + " has been favorited!")
+          } else
+            alert("The exercise " + exercise + " has already been favorited!")
+        })
       }
     },
     getExercises() {

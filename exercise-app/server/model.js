@@ -86,10 +86,11 @@ class User{
 
     addExercise(exercise, link){
         if(this.exercisesList.find(x => x.exercise == exercise)){
-            return;
+            return false;
         } 
         else {
             this.exercisesList.push({exercise: exercise, link: link});
+            return true;
         }
     }
 
@@ -109,7 +110,7 @@ class User{
 
     removeFriend(friend){
         var i = this.friendsList.findIndex(x => x.name == friend);
-        this.friendsList.splice(i, 1);
+        var removed = this.friendsList.splice(i, 1);
     }
 
     addFoodEntry(foodEntry){
@@ -121,14 +122,22 @@ class User{
     }
 
     changeWeight(newWeight){
+        if(!this.weight){
+            this.weight = newWeight;
+            return this.weight
+        }
         const previousWeight = this.weight;
         this.weight = newWeight;
         if(this.weight > previousWeight){
+            console.log("gained")
             return ("You've gained " + (this.weight - previousWeight) + " pounds.")
         } else if (this.weight < previousWeight){
+            console.log("loss")
             return ("You've lost " + Math.abs(this.weight - previousWeight) + " pounds.");
-        } else
+        } else{
+            console.log("equal")
             return("You've maintained your weight.");
+        }
     }
 }
 

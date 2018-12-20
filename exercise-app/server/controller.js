@@ -38,8 +38,8 @@ app.get("/profile/:id/exerciseList"), (req, res) => {
 
 app.post("/profile/:id/exerciseList", (req, res) =>{
     var user = db.getUser(req.body.userId);
-    user.addExercise(req.body.exercise, req.body.link);
-    res.send(user.showExercises());
+    var result = user.addExercise(req.body.exercise, req.body.link);
+    res.send(result);
 });
 
 app.delete("/profile/:id/exerciseList", (req, res) =>{
@@ -75,7 +75,9 @@ app.post("/profile/:id/foodDiary", (req, res) =>{
 });
 
 app.post("/profile/:id/weighIn", (req, res) =>{
-    res.send(db.getUser(req.params.id).changeWeight(req.body.weight));
+    var user = db.getUser(req.params.id);
+    var result = user.changeWeight(req.body.weight)
+    res.send(result);
 });
 
 module.exports = app;
